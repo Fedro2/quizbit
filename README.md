@@ -60,7 +60,7 @@ One person can act as both a learner and a set creator.
 **As** a set creator, I want to enter questions and their corresponding answers through the terminal, **so that** I can add content to a learning set.
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+Das ist ein Test
 ---
 ### US-05: Edit questions and answers
 
