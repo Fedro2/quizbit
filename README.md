@@ -161,30 +161,21 @@ One person can act as both a learner and a set creator.
 
 ## ✅ Project Requirements
 
-
-To be accepted, the project must meet the following requirements:
-
-1. Interactive app (console input)
-2. Data validation (input checking)
-3. File processing (read/write)
-
----
-
 ### 1. Interactive App (Console Input)
 
-...
+Users interact through numbered terminal menus and text prompts. They can create and edit sets, select a set, choose session size and order, answer questions, and view feedback and summaries. Commands allow restarting or quitting a learning session.
 
 ---
 
 ### 2. Data Validation
 
-...
+The application checks menu and question numbers, rejects empty questions and answers, and requires the session size to be a whole number within the selected set's size. Set names cannot be empty, contain path separators, or duplicate another saved name. Invalid input displays an explanatory message and allows another attempt. CSV loading rejects missing fields, invalid headers, unreadable files, and empty sets without starting a session.
 
 ---
 
 ### 3. File Processing
 
-...
+Learning sets are read from and written to CSV files using Python's built-in `csv` module. Creating or editing a set and choosing Save writes its question-answer pairs to the saved-sets folder. Reopening the file loads the saved content. Importing loads a separate CSV file without changing the original. Failed saves show an error and keep the current edits available for another attempt.
 
 
 ## 🔄 Team Workflow
