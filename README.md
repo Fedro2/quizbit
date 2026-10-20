@@ -5,7 +5,7 @@ Quizbit is the first project for the Programming Foundations course at FHNW, BSc
 ## 📝 Analysis
 
 
-### Problem
+### Problem 
 
 Students need to practise questions and answers when preparing for exams. Reading notes alone makes it difficult to check whether they can recall an answer without looking it up. They also need to organise their learning material and revisit questions they have answered incorrectly.
 
@@ -27,7 +27,8 @@ One person can act as both a learner and a set creator.
 ## 📖 User Stories
 
 
-### US-01: Import a learning set
+### US-01: Import a learning set julia
+
 
 **As** a set creator, I want to import an Excel file containing questions and answers, **so that** I can use an existing learning set.
 
