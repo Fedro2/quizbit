@@ -167,6 +167,7 @@ with material to practise.
 | Ferrari Pedro    | To be decided |
 | Tabakovic Anis   | To be decided |
 | Cabalzar Julia   | To be decided |
+| Cabalzar Julia   | US-02, US-03, US-04 |
 | Redjepi Ulpijana | To be decided |
 
 ## ✅ Project Requirements
