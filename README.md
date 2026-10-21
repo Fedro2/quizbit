@@ -97,7 +97,10 @@ One person can act as both a learner and a set creator.
 **As** a learner, I want to start a learning session for a selected learning set, **so that** I can practise my knowledge.
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+- After the learner chooses session size and order, display the first selected question and request an answer.
+- Display one question at a time without revealing its stored answer before submission.
+- An empty set displays a message instead of starting a session. Studying does not change the saved questions or
+answers.
 
 ---
 
@@ -106,7 +109,12 @@ One person can act as both a learner and a set creator.
 **As** a learner, I want to know whether each answer is correct or incorrect, **so that** I can assess my knowledge.
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+- Compare the complete entered and stored answers after trimming surrounding spaces and ignoring capitalisation.
+- Given the stored answer is def, an input of " DEF " is correct; function or de is incorrect. Show the stored answer
+after an incorrect attempt.
+- Do not assess unrestricted written responses, synonyms, or partial matches automatically.
+- An empty input requests another answer for the same question. Session commands are handled separately from
+answer checking.
 
 ---
 
@@ -115,7 +123,11 @@ One person can act as both a learner and a set creator.
 **As** a learner, I want incorrectly answered questions to appear again, **so that** I can practise until I have answered every question correctly.
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+- An incorrect answer moves its question to the end of the remaining questions. A correct answer removes its
+question from the current session.
+- Given question 1 is wrong and questions 2 and 3 are correct, question 1 appears again after question 3.
+- If the last remaining question is wrong, it is asked again. Complete the session only when every selected question
+has been answered correctly at least once.
 
 ---
 
@@ -154,7 +166,7 @@ One person can act as both a learner and a set creator.
 
 | Name             | Contribution |
 |------------------| --- |
-| Ferrari Pedro    | To be decided |
+| Ferrari Pedro    | US-08, 09, 10 |
 | Tabakovic Anis   | To be decided |
 | Cabalzar Julia   | To be decided |
 | Redjepi Ulpijana | To be decided |
