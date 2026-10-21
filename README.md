@@ -94,7 +94,8 @@ One person can act as both a learner and a set creator.
 **Acceptance criteria**<br><br>
 - For a set of N questions, accept a whole number from 1 to N; pressing Enter selects all N questions.
 - Selecting 3 questions from a ten-question set includes exactly 3 question rows in the session. Repetitions of wrong answers do not increase that selection.
-- Reject 0, negative numbers, numbers greater than N, decimals, and text, then request the number again.- Session selection leaves the full saved set unchanged. An empty set cannot start a session.
+- Reject 0, negative numbers, numbers greater than N, decimals, and text, then request the number again.
+- Session selection leaves the full saved set unchanged. An empty set cannot start a session.
 
 ---
 
