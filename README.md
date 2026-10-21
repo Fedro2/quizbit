@@ -5,7 +5,7 @@ Quizbit is the first project for the Programming Foundations course at FHNW, BSc
 ## 📝 Analysis
 
 
-### Problem
+### Problem 
 
 Students need to practise questions and answers when preparing for exams. Reading notes alone makes it difficult to check whether they can recall an answer without looking it up. They also need to organise their learning material and revisit questions they have answered incorrectly.
 
@@ -27,7 +27,8 @@ One person can act as both a learner and a set creator.
 ## 📖 User Stories
 
 
-### US-01: Import a learning set
+### US-01: Import a learning set 
+
 
 **As** a set creator, I want to import an Excel file containing questions and answers, **so that** I can use an existing learning set.
 
@@ -36,31 +37,40 @@ One person can act as both a learner and a set creator.
 
 ---
 
-### US-02: View and select learning sets
+### US-02: View and select learning sets Julia
 
-**As** a learner, I want to see all saved learning sets in the terminal and select one, **so that** I can study or edit my chosen topic.
+**As** a learner, I want to see all saved learning sets and select one, so that I can study or edit my chosen topic.
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+- Display saved CSV sets as an alphabetically sorted, numbered list starting at 1.
+- Selecting a listed number opens that set and displays its available actions.
+- If there are no sets, display a message and return to the main menu. Invalid numbers or text display an error and
+allow another selection.
 
 ---
 
 ### US-03: Create a new learning set
 
-**As** a set creator, I want to create a new learning set with a name of my choice, **so that** I can organise my own learning content.
+**As** a set creator, I want to create a named learning set, so that I can organise questions for a particular topic.
 
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+- Entering an available name opens an empty set that can be filled with questions.
+- Reject empty names, names containing path separators, and names already used by another saved set; ask for a
+different name.
+- Creating a set does not change existing sets. The new set is kept in memory until explicitly saved.
 
 ---
 
 ### US-04: Add questions and answers
 
-**As** a set creator, I want to enter questions and their corresponding answers through the terminal, **so that** I can add content to a learning set.
+**As** a set creator, I want to add a question and its predefined short answer, so that I can extend a learning set
+with material to practise.
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+- Entering a question and answer adds exactly one pair to the current set and displays confirmation.
+- Reject empty or whitespace-only questions and answers without adding an incomplete pair.
+- Remove surrounding spaces. Reject /quit and /restart as answers because they are reserved session commands.
 ---
 ### US-05: Edit questions and answers
 
@@ -157,6 +167,7 @@ One person can act as both a learner and a set creator.
 | Ferrari Pedro    | To be decided |
 | Tabakovic Anis   | To be decided |
 | Cabalzar Julia   | To be decided |
+| Cabalzar Julia   | US-02, US-03, US-04 |
 | Redjepi Ulpijana | To be decided |
 
 ## ✅ Project Requirements
