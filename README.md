@@ -29,10 +29,13 @@ One person can act as both a learner and a set creator.
 
 ### US-01: Import a learning set
 
-**As** a set creator, I want to import an Excel file containing questions and answers, **so that** I can use an existing learning set.
+As a learner, I want to see my progress and a session summary, so that I can understand how much I have learned and which questions remain.
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+During a session, show the number of questions mastered and remaining out of the selected session size.
+On completion or quitting, show correct attempts, incorrect attempts, total attempts, questions mastered, questions remaining, and accuracy.
+Given two questions are answered correctly after one incorrect attempt, the summary shows 2 mastered, 0 remaining, 3 attempts, and 66.7% accuracy.
+If no answers have been submitted, show 0 attempts and 0.0% accuracy. Blank answers and commands do not count as attempts.
 
 ---
 
@@ -121,19 +124,23 @@ One person can act as both a learner and a set creator.
 
 ### US-11: Quit a learning session
 
-**As** a learner, I want to quit an ongoing learning session at any time, **so that** I can return to the main menu.
+As a learner, I want to choose random question order, so that I practise recall without relying on a familiar sequence.
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+Before a session, offer file order and random order. Reject unsupported choices and request the choice again.
+File order uses the first requested number of questions in their stored order. Random order shuffles the set and selects the requested number of question rows without selecting a row twice.
+Randomising does not change the saved set. A one-question set still works; random order may match the original order by chance.
 
 ---
 
 ### US-12: Restart a learning session
 
-**As** a learner, I want to restart an ongoing learning session, **so that** I can practise the entire learning set again from the beginning.
+As a learner, I want to restart an ongoing learning session, so that I can practise its selected questions again from the beginning.
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+Entering /restart at an answer prompt resets mastered questions and all attempt counters.
+The same selected questions return to the session. File order is preserved, or the selected questions are shuffled again if random order was chosen.
+Restarting before the first answer works. The command ignores capitalisation and surrounding spaces and does not change the saved set.
 
 ---
 
@@ -172,19 +179,26 @@ To be accepted, the project must meet the following requirements:
 
 ### 1. Interactive App (Console Input)
 
-...
-
----
+Users interact through numbered terminal menus and text prompts. They can create and edit sets, select a set,
+choose session size and order, answer questions, and view feedback and summaries. Commands allow
+restarting or quitting a learning session.
 
 ### 2. Data Validation
 
-...
-
----
+The application checks menu and question numbers, rejects empty questions and answers, and requires the
+session size to be a whole number within the selected set's size. Set names cannot be empty, contain path
+separators, or duplicate another saved name. Invalid input displays an explanatory message and allows another
+attempt. CSV loading rejects missing fields, invalid headers, unreadable files, and empty sets without starting a
+session.
+Answer checking compares only predefined short answers. It ignores capitalisation and surrounding spaces and
+otherwise requires a full match; it does not evaluate unrestricted written responses.
 
 ### 3. File Processing
 
-...
+Learning sets are read from and written to CSV files using Python's built-in csv module. Creating or editing a set
+and choosing Save writes its question-answer pairs to the saved-sets folder. Reopening the file loads the saved
+content. Importing loads a separate CSV file without changing the original. Failed saves show an error and keep
+the current edits available for another attempt.
 
 
 ## 🔄 Team Workflow
