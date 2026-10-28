@@ -71,7 +71,9 @@ If no answers have been submitted, show 0 attempts and 0.0% accuracy. Blank answ
 
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+- Display numbered question-answer pairs and allow the creator to select one for editing.
+- Replacing the selected question and answer changes only that pair; after saving and reopening, the replacement is still present.
+- Reject invalid selection numbers and empty replacement fields. Cancelling the selection leaves the set unchan
 
 ---
 
@@ -81,17 +83,22 @@ If no answers have been submitted, show 0 attempts and 0.0% accuracy. Blank answ
 
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+- Display the selected pair and request confirmation before deleting it.
+- Confirming deletion in a three-pair set removes exactly the selected pair and leaves two pairs. Declining changes nothing.
+- Invalid selections or confirmations allow another attempt. An empty set cannot be studied or saved over an existing set.
 
 ---
 
 ### US-07: Save a learning set as an Excel file
 
-**As** a set creator, I want to save new or edited learning sets as Excel files, **so that** my changes are preserved and I can use the sets again later.
+**As** a learner, I want to choose how many questions to practise in a session, **so that** I can adapt the session to the time I have available.
 
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+- For a set of N questions, accept a whole number from 1 to N; pressing Enter selects all N questions.
+- Selecting 3 questions from a ten-question set includes exactly 3 question rows in the session. Repetitions of wrong answers do not increase that selection.
+- Reject 0, negative numbers, numbers greater than N, decimals, and text, then request the number again.
+- Session selection leaves the full saved set unchanged. An empty set cannot start a session.
 
 ---
 
@@ -164,18 +171,9 @@ Restarting before the first answer works. The command ignores capitalisation and
 | Ferrari Pedro    | To be decided |
 | Tabakovic Anis   | To be decided |
 | Cabalzar Julia   | To be decided |
-| Redjepi Ulpijana | To be decided |
+| Redjepi Ulpijana | US-05, US-06, US-07 |
 
 ## ✅ Project Requirements
-
-
-To be accepted, the project must meet the following requirements:
-
-1. Interactive app (console input)
-2. Data validation (input checking)
-3. File processing (read/write)
-
----
 
 ### 1. Interactive App (Console Input)
 
