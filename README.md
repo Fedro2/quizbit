@@ -40,7 +40,7 @@ If no answers have been submitted, show 0 attempts and 0.0% accuracy. Blank answ
 
 ---
 
-### US-02: View and select learning sets Julia
+### US-02: View and select learning sets
 
 **As** a learner, I want to see all saved learning sets and select one, so that I can study or edit my chosen topic.
 
