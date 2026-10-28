@@ -30,10 +30,13 @@ One person can act as both a learner and a set creator.
 ### US-01: Import a learning set 
 
 
-**As** a set creator, I want to import an Excel file containing questions and answers, **so that** I can use an existing learning set.
+As a learner, I want to see my progress and a session summary, so that I can understand how much I have learned and which questions remain.
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+During a session, show the number of questions mastered and remaining out of the selected session size.
+On completion or quitting, show correct attempts, incorrect attempts, total attempts, questions mastered, questions remaining, and accuracy.
+Given two questions are answered correctly after one incorrect attempt, the summary shows 2 mastered, 0 remaining, 3 attempts, and 66.7% accuracy.
+If no answers have been submitted, show 0 attempts and 0.0% accuracy. Blank answers and commands do not count as attempts.
 
 ---
 
@@ -78,7 +81,9 @@ with material to practise.
 
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+- Display numbered question-answer pairs and allow the creator to select one for editing.
+- Replacing the selected question and answer changes only that pair; after saving and reopening, the replacement is still present.
+- Reject invalid selection numbers and empty replacement fields. Cancelling the selection leaves the set unchan
 
 ---
 
@@ -88,17 +93,22 @@ with material to practise.
 
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+- Display the selected pair and request confirmation before deleting it.
+- Confirming deletion in a three-pair set removes exactly the selected pair and leaves two pairs. Declining changes nothing.
+- Invalid selections or confirmations allow another attempt. An empty set cannot be studied or saved over an existing set.
 
 ---
 
 ### US-07: Save a learning set as an Excel file
 
-**As** a set creator, I want to save new or edited learning sets as Excel files, **so that** my changes are preserved and I can use the sets again later.
+**As** a learner, I want to choose how many questions to practise in a session, **so that** I can adapt the session to the time I have available.
 
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+- For a set of N questions, accept a whole number from 1 to N; pressing Enter selects all N questions.
+- Selecting 3 questions from a ten-question set includes exactly 3 question rows in the session. Repetitions of wrong answers do not increase that selection.
+- Reject 0, negative numbers, numbers greater than N, decimals, and text, then request the number again.
+- Session selection leaves the full saved set unchanged. An empty set cannot start a session.
 
 ---
 
@@ -107,7 +117,10 @@ with material to practise.
 **As** a learner, I want to start a learning session for a selected learning set, **so that** I can practise my knowledge.
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+- After the learner chooses session size and order, display the first selected question and request an answer.
+- Display one question at a time without revealing its stored answer before submission.
+- An empty set displays a message instead of starting a session. Studying does not change the saved questions or
+answers.
 
 ---
 
@@ -116,7 +129,12 @@ with material to practise.
 **As** a learner, I want to know whether each answer is correct or incorrect, **so that** I can assess my knowledge.
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+- Compare the complete entered and stored answers after trimming surrounding spaces and ignoring capitalisation.
+- Given the stored answer is def, an input of " DEF " is correct; function or de is incorrect. Show the stored answer
+after an incorrect attempt.
+- Do not assess unrestricted written responses, synonyms, or partial matches automatically.
+- An empty input requests another answer for the same question. Session commands are handled separately from
+answer checking.
 
 ---
 
@@ -125,25 +143,33 @@ with material to practise.
 **As** a learner, I want incorrectly answered questions to appear again, **so that** I can practise until I have answered every question correctly.
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+- An incorrect answer moves its question to the end of the remaining questions. A correct answer removes its
+question from the current session.
+- Given question 1 is wrong and questions 2 and 3 are correct, question 1 appears again after question 3.
+- If the last remaining question is wrong, it is asked again. Complete the session only when every selected question
+has been answered correctly at least once.
 
 ---
 
 ### US-11: Quit a learning session
 
-**As** a learner, I want to quit an ongoing learning session at any time, **so that** I can return to the main menu.
+As a learner, I want to choose random question order, so that I practise recall without relying on a familiar sequence.
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+Before a session, offer file order and random order. Reject unsupported choices and request the choice again.
+File order uses the first requested number of questions in their stored order. Random order shuffles the set and selects the requested number of question rows without selecting a row twice.
+Randomising does not change the saved set. A one-question set still works; random order may match the original order by chance.
 
 ---
 
 ### US-12: Restart a learning session
 
-**As** a learner, I want to restart an ongoing learning session, **so that** I can practise the entire learning set again from the beginning.
+As a learner, I want to restart an ongoing learning session, so that I can practise its selected questions again from the beginning.
 
 **Acceptance criteria**<br><br>
-*To be defined...*
+Entering /restart at an answer prompt resets mastered questions and all attempt counters.
+The same selected questions return to the session. File order is preserved, or the selected questions are shuffled again if random order was chosen.
+Restarting before the first answer works. The command ignores capitalisation and surrounding spaces and does not change the saved set.
 
 ---
 
@@ -162,39 +188,37 @@ with material to practise.
 ## 👥 Team & Contributions
 
 
-| Name             | Contribution |
-|------------------| --- |
-| Ferrari Pedro    | To be decided |
-| Tabakovic Anis   | To be decided |
-| Cabalzar Julia   | US-02, US-03, US-04 |
-| Redjepi Ulpijana | To be decided |
+| Student | Responsible user stories | Contribution |
+| --- | --- | --- |
+| Julia | US-02, US-03, US-04 | Display and select sets, create named sets, add question-answer pairs |
+| Lana | US-05, US-06, US-07 | Edit pairs, delete pairs, validate and choose session size |
+| Pedro | US-08, US-09, US-10 | Start learning sessions, check short answers, repeat missed questions |
+| Anis | US-01, US-11, US-12 | Show progress summaries, randomise question order, restart sessions |
 
 ## ✅ Project Requirements
 
-
-To be accepted, the project must meet the following requirements:
-
-1. Interactive app (console input)
-2. Data validation (input checking)
-3. File processing (read/write)
-
----
-
 ### 1. Interactive App (Console Input)
 
-...
-
----
+Users interact through numbered terminal menus and text prompts. They can create and edit sets, select a set,
+choose session size and order, answer questions, and view feedback and summaries. Commands allow
+restarting or quitting a learning session.
 
 ### 2. Data Validation
 
-...
-
----
+The application checks menu and question numbers, rejects empty questions and answers, and requires the
+session size to be a whole number within the selected set's size. Set names cannot be empty, contain path
+separators, or duplicate another saved name. Invalid input displays an explanatory message and allows another
+attempt. CSV loading rejects missing fields, invalid headers, unreadable files, and empty sets without starting a
+session.
+Answer checking compares only predefined short answers. It ignores capitalisation and surrounding spaces and
+otherwise requires a full match; it does not evaluate unrestricted written responses.
 
 ### 3. File Processing
 
-...
+Learning sets are read from and written to CSV files using Python's built-in csv module. Creating or editing a set
+and choosing Save writes its question-answer pairs to the saved-sets folder. Reopening the file loads the saved
+content. Importing loads a separate CSV file without changing the original. Failed saves show an error and keep
+the current edits available for another attempt.
 
 
 ## 🔄 Team Workflow
