@@ -1,6 +1,8 @@
-"""Find and load Quizbit learning sets from CSV files."""
+"""Read, import and save Quizbit learning sets as CSV files."""
 
 import csv
+import os
+import tempfile
 from pathlib import Path
 
 
@@ -76,7 +78,7 @@ def _read_questions(file_path):
 
 
 def load_learning_set(path):
-    """Load and validate a saved learning set."""
+    """Load a saved set, retaining its path for a later Save action."""
     file_path = Path(path).resolve()
     if file_path.suffix.casefold() != ".csv":
         raise ValueError("Select a CSV file.")
@@ -89,3 +91,91 @@ def load_learning_set(path):
         "file_path": file_path,
         "has_unsaved_changes": False,
     }
+
+
+def import_learning_set(source_path):
+    """Import a CSV without keeping its source path as a save target."""
+    learning_set = load_learning_set(source_path)
+    learning_set["file_path"] = None
+    learning_set["has_unsaved_changes"] = True
+    return learning_set
+
+
+def _prepare_questions(questions):
+    if not isinstance(questions, list) or not questions:
+        raise ValueError("An empty learning set cannot be saved.")
+
+    clean_pairs = []
+    for pair in questions:
+        if not isinstance(pair, dict):
+            raise ValueError("Each question-answer pair must be a dictionary.")
+        clean_pairs.append(
+            _validate_pair(pair.get("question"), pair.get("answer"))
+        )
+    return clean_pairs
+
+
+def _get_save_path(learning_set, sets_folder):
+    folder = Path(sets_folder).resolve()
+    name = _validate_name(learning_set.get("name"))
+    current_path = learning_set.get("file_path")
+
+    if current_path is None:
+        target = folder / f"{name}.csv"
+    else:
+        target = Path(current_path).resolve()
+        if target.parent != folder:
+            raise ValueError("Import external sets before saving them.")
+        if (
+            target.suffix.casefold() != ".csv"
+            or target.stem.casefold() != name.casefold()
+        ):
+            raise ValueError("The set name must match its saved file.")
+
+    for existing in list_saved_sets(folder):
+        if existing.stem.casefold() == name.casefold():
+            if current_path is None or existing.resolve() != target:
+                raise ValueError("A saved set already uses this name.")
+
+    if current_path is None and target.exists():
+        raise ValueError("The destination is already in use.")
+    return target
+
+
+def _write_questions(target, questions):
+    target.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path = None
+
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            newline="",
+            dir=target.parent,
+            prefix=".quizbit-",
+            suffix=".tmp",
+            delete=False,
+        ) as file:
+            temporary_path = Path(file.name)
+            writer = csv.DictWriter(file, fieldnames=CSV_FIELDS)
+            writer.writeheader()
+            writer.writerows(questions)
+
+        # Keep the old file until the complete replacement has been written.
+        os.replace(temporary_path, target)
+    finally:
+        if temporary_path is not None:
+            temporary_path.unlink(missing_ok=True)
+
+
+def save_learning_set(learning_set, sets_folder):
+    """Save a valid set and update its metadata only after success."""
+    questions = _prepare_questions(learning_set.get("questions"))
+    target = _get_save_path(learning_set, sets_folder)
+    _write_questions(target, questions)
+
+    learning_set["name"] = target.stem
+    learning_set["questions"] = questions
+    learning_set["file_path"] = target
+    learning_set["has_unsaved_changes"] = False
+    return target

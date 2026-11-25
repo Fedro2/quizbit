@@ -230,7 +230,7 @@ Learning sets are read from and written to CSV files using Python's built-in `cs
 
 ### CSV storage
 
-`storage.py` lists and loads learning sets. CSV files use UTF-8
+`storage.py` lists, loads, imports and saves learning sets. CSV files use UTF-8
 with the header `question,answer`. See [the example set](sets/python_basics.csv).
 
 Run the storage tests from the project folder:
