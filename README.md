@@ -226,6 +226,19 @@ Answer checking compares only predefined short answers. It ignores capitalisatio
 
 Learning sets are read from and written to CSV files using Python's built-in `csv` module. Creating or editing a set and choosing Save writes its question-answer pairs to the saved-sets folder. Reopening the file loads the saved content. Importing loads a separate CSV file without changing the original. Failed saves show an error and keep the current edits available for another attempt.
 
+## ⚙️ Implementation
+
+### CSV storage
+
+`storage.py` lists and loads learning sets. CSV files use UTF-8
+with the header `question,answer`. See [the example set](sets/python_basics.csv).
+
+Run the storage tests from the project folder:
+
+```bash
+python3 -m unittest discover -s tests
+```
+
 ## 👥 Team & Contributions
 
 | Student | Responsible user stories | Contribution |
